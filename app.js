@@ -2,6 +2,49 @@
 const stocksList = ['FB', 'AAPL', 'TSLA', 'GOOGL'];
 const validationList = [];
 
+// Populate a list of all the symbols
+// $(document).ready(function(){
+const validate = function(){
+  event.preventDefault(); 
+
+
+  const symbolURL = `https://api.iextrading.com/1.0/ref-data/symbols`;
+
+  $.ajax({
+    url: symbolURL,
+    method: 'GET'
+  })
+  .then(function(response) {
+
+    console.log(response);
+    console.log(response[101].symbol);
+    
+    for(let i = 0; validationList.length; i++){
+      console.log(response[i].symbol); 
+      const stockSymbol = response[i].symbol;
+      validationList.push(stockSymbol);
+
+    }
+    console.log(validationList);
+    
+  })
+
+
+};
+// });
+
+$(`#symbol-List`).on('click', validate);
+
+// Function to call the Logo
+
+// const displayLogo = function(event){
+//   event.preventDefault(); 
+//   const symbol = $(this).attr('data-name');
+  
+
+// }
+
+
 // Here we run our AJAX call to the EXTrading API
 const displayInfo = function(event){
 
@@ -12,8 +55,7 @@ event.preventDefault();
 const symbol = $(this).attr('data-name');
 const queryURL = `https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote,news&range=1m&last=1`;
 
-
-// const numberVal = $('#number').val().trim();
+const logoURL = `https://api.iextrading.com/1.0/stock/${symbol}/logo`;
 
 $.ajax({
   url: queryURL,
@@ -22,23 +64,7 @@ $.ajax({
 
 .then(function(response) {
 
-  // // See table of information
-  // console.log(response);
-
-  // // Company Name
-  // const company = (response.quote.companyName);
-  // console.log(company);
-
-  // //Company Logo
-  // const logo = "🐱‍🚀"
-  // console.log(logo);
-
-  // //Price 
-  // console.log(response.quote.latestPrice);
-  
-  // // up to 10 News articles
-  // console.log(response.news[0].headline);
-
+    console.log(response);  
     // Creating a div to hold the stock
     const stockDiv = $('<div>').addClass('stock');
 
@@ -48,10 +74,25 @@ $.ajax({
     // Creating an element to display the company name
     const nameHolder = $('<p>').text(`Company Name: ${companyName}`);
     
-
     // Appending the name to our stockDiv
     stockDiv.append(nameHolder);
 
+    // Logo
+    $.ajax({
+      url: logoURL,
+      method: 'GET'
+    })
+    
+    .then(function(response) {
+
+      console.log(response.url)
+
+      const logoSymbol = $(`<img src="${response.url}">`)
+      
+      stockDiv.append(logoSymbol);
+    }) //End of logoURL
+
+    
     // Storing the stock symbol
     const stockSymbol = response.quote.symbol;
 
@@ -82,13 +123,9 @@ $.ajax({
     // Finally adding the stockDiv to the DOM
     // Until this point nothing is actually displayed on our page
     $('#stock-info').prepend(`<hr>`);
-    $('#stock-info').prepend(stockDiv);
- 
- 
+    $('#stock-info').prepend(stockDiv); 
 
-})
-
-
+})  //end of queryURL
 
 };
 
@@ -128,7 +165,7 @@ const renderButtons = function () {
 
 // Clicking on the button creates a new button
 const addButton = function(event) {
-  console.log("Verifying entering the addButton section")
+ 
   // event.preventDefault() prevents the form from trying to submit itself.
   event.preventDefault();
  
