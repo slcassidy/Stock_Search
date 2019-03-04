@@ -2,6 +2,9 @@
 const stocksList = ['FB', 'AAPL', 'TSLA', 'GOOGL'];
 const validationList = [];
 
+// Global Variables
+let newsArticle = "";
+
 // Populate a list of all the symbols
 // $(document).ready(function(){
 const validate = function(){
@@ -19,7 +22,7 @@ const validate = function(){
     console.log(response);
     console.log(response[101].symbol);
     
-    for(let i = 0; response.length; i++){
+    for(let i = 0; i < response.length; i++){
     
       const stockSymbol = (response[i].symbol);
       console.log(stockSymbol); 
@@ -124,9 +127,10 @@ $.ajax({
 
       console.log(response);
 
-      for(let i = 0; response.length = 10; i++){
+      for(let i = 0; i < 10; i++){
     
-        const newsArticle = (response[i].headline);
+        // const 
+        newsArticle = (response[i].headline);
         console.log(newsArticle); 
         console.log([i]); 
 
