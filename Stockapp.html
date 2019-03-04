@@ -47,20 +47,35 @@
                 </h1>
               </div>   
             </div>
+        <!-- Stock Buttons  -->
+        <div class="row">
+            <div class="col-12">
+                <form>
+                    <div class="form-group">
+                      <label>Select Stock Symbol</label>
+                      <div id="buttons-view"></div>
+                      <br>
+                    </div>
+                  </form>
+            </div>
+          </div>
         <!-- Middle Row -->
           <div class="row">
             <div class="col-12">
                 <form>
                     <div class="form-group">
-                      <label for="searching">Enter Stock Symbol</label>
-                      <input type="text" class="form-control" id="find">
+                      <label for="searching">New Stock Symbol</label>
+                      <input type="text" class="form-control" id="input">
                     </div>
                     <br>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default" id="run-search">
-                            <i class="fa fa-search"></i> Search</button>
+                        <input  type="button" class="btn btn-primary" value= "Add Stock" id="add-symbol">
+                            </input> 
+                            <!-- How can I add an image -> class="fas fa-plus-circle"  -->
                   </div>
-                  </form>
+                   <!-- Button triggers new stock to be added -->
+                    <!-- <input id="add-stock" type="submit" value="Add a Stock Symbol">
+                  </form> -->
             </div>
           </div>
           <!-- Bottom Row -->
@@ -79,7 +94,7 @@
             </div>
   
             <!-- This main card will hold each of the resulting articles -->
-            <div class="card-body" id="article-section">
+            <div class="card-body" id="stock-info">
             </div>
           </div>
         </div>
