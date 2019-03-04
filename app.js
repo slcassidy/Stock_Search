@@ -106,6 +106,14 @@ $.ajax({
     // Appending the price to our stockDiv
     stockDiv.append(priceHolder);
 
+
+    
+
+    // Finally adding the stockDiv to the DOM
+    // Until this point nothing is actually displayed on our page
+    $('#stock-info').prepend(`<hr>`);
+    $('#stock-info').prepend(stockDiv); 
+
     // News 10
     $.ajax({
       url: newsURL,
@@ -130,12 +138,6 @@ $.ajax({
         }
 
     }) //End News
-    
-
-    // Finally adding the stockDiv to the DOM
-    // Until this point nothing is actually displayed on our page
-    $('#stock-info').prepend(`<hr>`);
-    $('#stock-info').prepend(stockDiv); 
 
 })  //end of queryURL
 
