@@ -30,7 +30,7 @@ const validate = function(){
       validationList.push(stockSymbol);
 
     }
-    console.log(validationList);
+    // console.log(validationList);
     
   })
 
@@ -197,10 +197,35 @@ const addButton = function(event) {
 
   // This line will grab the text from the input box and make upper case as well as trim no spaces
   const stock = $('#input').val().trim().toUpperCase();
+
+    // The stock from the text box is then added to our array
   
-  // The stock from the text box is then added to our array
-  stocksList.push(stock);
-  console.log(stocksList);
+   
+    var check = 0;
+    console.log(`beginning ${check}`);
+  for(let i = 0; i < validationList.length; i++){
+    const checkSymbol = validationList[i];
+    // console.log(checkSymbol); 
+    console.log(`in for loop ${check}`);
+    if(checkSymbol === stock){
+      check = 1;
+      break;
+    // }else{
+    //   check = true;
+    //   console.log(`Not equal ${check}`);
+    }
+
+  };  
+
+  // Make sure the new Stock is not pushed if  
+  // console.log(stocksList);
+  console.log(`before append stock button ${check}`);
+  if(check === 0){
+    alert("Stock symbol is not valid. Please try again");
+  }else{
+    stocksList.push(stock);
+  };
+
 
   // Deletes the contents of the input
   $('#input').val('');
