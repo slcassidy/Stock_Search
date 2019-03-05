@@ -243,6 +243,15 @@ $('#buttons-view').on('click', '.stock-btn', displayInfo);
 // Calling the renderButtons function to display the initial buttons
 renderButtons();
 
+  // Function to empty out the articles
+  const clear = function () {
+    $('#stock-info').empty();
+  }
+
+
+  //  .on('click') function associated with the clear button
+  $('#clear-all').on('click', clear);
+
 
 
 
