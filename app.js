@@ -8,7 +8,7 @@ let newsArticle = "";
 // Populate a list of all the symbols
 // $(document).ready(function(){
 const validate = function(){
-  event.preventDefault(); 
+  // event.preventDefault(); 
 
 
   const symbolURL = `https://api.iextrading.com/1.0/ref-data/symbols`;
@@ -19,14 +19,14 @@ const validate = function(){
   })
   .then(function(response) {
 
-    console.log(response);
-    console.log(response[101].symbol);
+    // console.log(response);
+    // console.log(response[101].symbol);
     
     for(let i = 0; i < response.length; i++){
     
       const stockSymbol = (response[i].symbol);
-      console.log(stockSymbol); 
-      console.log([i]); 
+      // console.log(stockSymbol); 
+      // console.log([i]); 
       validationList.push(stockSymbol);
 
     }
@@ -38,7 +38,11 @@ const validate = function(){
 };
 // });
 
-$(`#symbol-List`).on('click', validate);
+// Test by using a button
+// $(`#symbol-List`).on('click', validate);
+
+// Create the table when the table while the page loads
+$(document).ready(validate);
 
 // Function to call the Logo
 
@@ -129,7 +133,7 @@ $.ajax({
 
       for(let i = 0; i < 10; i++){
     
-        // const 
+        // global newsArticle above 
         newsArticle = (response[i].headline);
         console.log(newsArticle); 
         console.log([i]); 
@@ -191,8 +195,8 @@ const addButton = function(event) {
   event.preventDefault();
  
 
-  // This line will grab the text from the input box
-  const stock = $('#input').val().trim();
+  // This line will grab the text from the input box and make upper case as well as trim no spaces
+  const stock = $('#input').val().trim().toUpperCase();
   
   // The stock from the text box is then added to our array
   stocksList.push(stock);
