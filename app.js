@@ -1,4 +1,6 @@
-// $(document).ready(function(){
+// Same thing as $(document).ready(function()
+$(function(){
+  // $(document).ready(function(){
 // stock tale
 const stocksList = ['FB', 'AAPL', 'TSLA', 'GOOGL'];
 const validationList = [];
@@ -7,8 +9,10 @@ const validationList = [];
 const hideMod = function(){
 $(`.modal-dialog`).hide();
 console.log("Hide at the top");
+
 };
 
+// Call the hide function
 hideMod();
 
 
@@ -299,3 +303,5 @@ $(`#alertB`).on("click", function () {
 
 });
 
+
+})
