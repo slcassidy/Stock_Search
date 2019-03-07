@@ -1,12 +1,16 @@
+// $(document).ready(function(){
 // stock tale
 const stocksList = ['FB', 'AAPL', 'TSLA', 'GOOGL'];
 const validationList = [];
 
+// Hide the Modal at the beginning
+$(`.modal-dialog`).hide();
+
 // Global Variables
 let newsArticle = "";
-
+let logoSymbol = "";
 // Populate a list of all the symbols
-// $(document).ready(function(){
+
 const validate = function(){
   // event.preventDefault(); 
 
@@ -38,18 +42,29 @@ const validate = function(){
 };
 // });
 
-// Test by using a button
-// $(`#symbol-List`).on('click', validate);
-
 // Create the table when the table while the page loads
 $(document).ready(validate);
 
 // Function to call the Logo
+// const getLogo = function(){
 
-// const displayLogo = function(event){
-//   event.preventDefault(); 
-//   const symbol = $(this).attr('data-name');
+//    event.preventDefault(); 
+//        // Logo
+//        $.ajax({
+//         url: logoURL,
+//         method: 'GET'
+//       })
+      
+//       .then(function(response) {
   
+//         console.log(response.url)
+//         const stockSid = $('<div>').addClass('stockSide');
+//         const logoSymbol = $(`<img src="${response.url}">`)
+        
+  
+//         stockSid.append(logoSymbol);
+//         $(`#stock-side`).prepend(logoSymbol)
+//       }) //End of logoURL
 
 // }
 
@@ -83,26 +98,10 @@ $.ajax({
     const companyName = response.quote.companyName;
 
     // Creating an element to display the company name
-    const nameHolder = $('<p>').text(`Company Name: ${companyName}`);
+    const nameHolder = $('<h3>').text(`Company Name: ${companyName}`);
     
     // Appending the name to our stockDiv
     stockDiv.append(nameHolder);
-
-    // Logo
-    $.ajax({
-      url: logoURL,
-      method: 'GET'
-    })
-    
-    .then(function(response) {
-
-      console.log(response.url)
-
-      const logoSymbol = $(`<img src="${response.url}">`)
-      
-      stockDiv.append(logoSymbol);
-    }) //End of logoURL
-
     
     // Storing the price
     const stockPrice = response.quote.latestPrice;
@@ -119,8 +118,12 @@ $.ajax({
     // Finally adding the stockDiv to the DOM
     // Until this point nothing is actually displayed on our page
     $('#stock-info').prepend(`<hr>`);
-    $('#stock-info').prepend(stockDiv); 
+    $('#stock-info').prepend(stockDiv);
+    // getLogo ();
+  
+   
 
+    count = 0;
     // News 10
     $.ajax({
       url: newsURL,
@@ -143,9 +146,29 @@ $.ajax({
 
         // Appending the summary to our stockDiv
         stockDiv.append(summaryHolder);
+        count++
         }
 
     }) //End News
+
+     // Logo
+     $.ajax({
+      url: logoURL,
+      method: 'GET'
+    })
+    
+    .then(function(response) {
+
+      console.log(response.url)
+      // const stockSid = $('<div>').addClass('stock');
+      console.log(count);
+      const logoSymbol = $(`<img class="image"src="${response.url}">`)
+      
+
+      // stockDiv.append(logoSymbol);
+      // $(`#stock-side`).prepend(logoSymbol);
+      $(`#stock-info`).prepend(logoSymbol);
+    }) //End of logoURL
 
 })  //end of queryURL
 
@@ -221,7 +244,14 @@ const addButton = function(event) {
   // console.log(stocksList);
   console.log(`before append stock button ${check}`);
   if(check === 0){
-    alert("Stock symbol is not valid. Please try again");
+    // alert("Stock symbol is not valid. Please try again");
+
+    $('#myModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')     
+    });
+    $('.modal-dialog').show();
+    console.log("show up!!");
+
   }else{
     stocksList.push(stock);
   };
@@ -252,6 +282,11 @@ renderButtons();
   //  .on('click') function associated with the clear button
   $('#clear-all').on('click', clear);
 
+  // Clear the Alert Button
+  $(`#alertB`).on("click", function(){
+    $(`.modal-dialog`).hide();
+
+  })
 
 
 
